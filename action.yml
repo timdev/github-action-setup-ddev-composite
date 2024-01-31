@@ -1,0 +1,14 @@
+name: "Setup DDEV"
+description: "Set up DDEV on your Ubuntu 22.04 runner"
+runs:
+  using: "composite"
+  steps:
+  - name: Check Runner OS
+    if: ${{ runner.os != 'Linux' }}
+    shell: bash
+    run: |
+      echo "::error title=⛔ error hint::Support Linux Only"
+      exit 1
+  - name: Install DDEV
+    shell: sh
+    run: curl -fsSL https://ddev.com/install.sh | bash
